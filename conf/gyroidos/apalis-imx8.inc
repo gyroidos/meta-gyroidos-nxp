@@ -16,10 +16,10 @@ INITRAMFS_IMAGE = "gyroidos-cml-initramfs"
 
 GYROIDOS_HARDWARE = "arm"
 GYROIDOS_LOGTTY = "ttyLP1"
-GYROIDOS_CONTAINER_ARCH = "qemuarm64"
+GYROIDOS_GUESTOS_ARCH = "qemuarm64"
 GYROIDOS_FSTYPES = "gyroidosfslc"
 
-BBMULTICONFIG = "container"
+BBMULTICONFIG = "guestos"
 PACKAGE_CLASSES = "package_ipk"
 KERNEL_CLASSES:append = " kernel-fitimage "
 KERNEL_IMAGETYPES:append = " fitImage"
