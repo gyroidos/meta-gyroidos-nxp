@@ -7,10 +7,10 @@ INITRAMFS_IMAGE_BUNDLE = "0"
 
 GYROIDOS_HARDWARE = "arm"
 GYROIDOS_LOGTTY = "ttyLP0"
-GYROIDOS_CONTAINER_ARCH = "qemuarm64"
+GYROIDOS_GUESTOS_ARCH = "qemuarm64"
 GYROIDOS_FSTYPES = "wic wic.bmap"
 
-BBMULTICONFIG = "container"
+BBMULTICONFIG = "guestos"
 KERNEL_CLASSES:append = " kernel-fitimage "
 KERNEL_IMAGETYPE:tqma8mpxl = "fitImage"
 
