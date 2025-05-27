@@ -11,8 +11,7 @@ GYROIDOS_GUESTOS_ARCH = "qemuarm64"
 GYROIDOS_FSTYPES = "wic wic.bmap"
 
 BBMULTICONFIG = "guestos"
-KERNEL_CLASSES:append = " kernel-fitimage "
-KERNEL_IMAGETYPE:tqma8mpxl = "fitImage"
+PACKAGE_CLASSES = "package_ipk"
 
 IMAGE_BOOT_FILES:tqma8mpxl = "${KERNEL_DEPLOYSUBDIR}/fitImage-gyroidos-cml-initramfs-${MACHINE}-${MACHINE};fitImage-gyroidos-cml-initramfs"
 WKS_FILE:tqma8mpxl = "tqma8mpxl.wks.in"
