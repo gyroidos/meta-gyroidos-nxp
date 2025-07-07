@@ -1,0 +1,34 @@
+From bd1fc165375497c4f3bd120576ee290ea175a06c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Michael=20Wei=C3=9F?= <michael.weiss@aisec.fraunhofer.de>
+Date: Mon, 7 Jul 2025 15:24:45 +0200
+Subject: [PATCH] daemon/c_idmapped: enable idmapped mount support for 6.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Use this patch only on GyroidOS kernel with applied backports of
+idmapped mount support for squashfs and tmpfs.
+
+Signed-off-by: Michael Weiß <michael.weiss@aisec.fraunhofer.de>
+---
+ daemon/c_idmapped.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/daemon/c_idmapped.c b/daemon/c_idmapped.c
+index 156b817b..1ff68724 100644
+--- a/daemon/c_idmapped.c
++++ b/daemon/c_idmapped.c
+@@ -459,7 +459,9 @@ error:
+ static bool
+ is_idmapping_supported()
+ {
+-	return kernel_version_check("6.3");
++	// We ensure the backports for idmapped mount support for squashfs (mainline 6.2)
++	// and tmpfs (mainline 6.3) are applied by the corresponding yocto layer
++	return kernel_version_check("6.1");
+ }
+ 
+ static int
+-- 
+2.39.5
+
