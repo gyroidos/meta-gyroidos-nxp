@@ -1,0 +1,27 @@
+From 5e7a9610bf39888a623069da79cc4ba67e9df1ab Mon Sep 17 00:00:00 2001
+From: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+Date: Tue, 5 Aug 2025 11:42:27 +0200
+Subject: [PATCH] include/configs/ls1088ardb.h: DPL lazy init from bootpart
+
+Load data path layout from SD/MMC bootpart.
+
+TODO: secure boot
+
+Signed-off-by: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+---
+ include/configs/ls1088ardb.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/configs/ls1088ardb.h b/include/configs/ls1088ardb.h
+index 6a461263ef6..068ccb56e28 100644
+--- a/include/configs/ls1088ardb.h
++++ b/include/configs/ls1088ardb.h
+@@ -465,7 +465,7 @@
+ 		"env exists secureboot && esbc_halt;"
+ #define SD_BOOTCOMMAND						\
+ 		"env exists mcinitcmd && mmcinfo; "		\
+-		"mmc read 0x80001000 0x6800 0x800; "		\
++		"load mmc 0:1 0x80001000 dpl.dtb; "		\
+ 		"env exists mcinitcmd && env exists secureboot "	\
+ 		" && mmc read 0x806C0000 0x3600 0x20 "		\
+ 		"&& esbc_validate 0x806C0000;env exists mcinitcmd "	\
