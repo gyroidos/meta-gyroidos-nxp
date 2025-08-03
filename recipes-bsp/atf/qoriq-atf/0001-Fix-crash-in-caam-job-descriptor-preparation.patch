@@ -1,0 +1,35 @@
+From 2511f46501f60508952b62b59d28a3635b08df68 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Johannes=20Wiesb=C3=B6ck?=
+ <johannes.wiesboeck@aisec.fraunhofer.de>
+Date: Sun, 3 Aug 2025 14:11:42 +0000
+Subject: [PATCH] Fix crash in caam job descriptor preparation
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Johannes Wiesböck <johannes.wiesboeck@aisec.fraunhofer.de>
+---
+ drivers/nxp/crypto/caam/src/jobdesc.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/nxp/crypto/caam/src/jobdesc.c b/drivers/nxp/crypto/caam/src/jobdesc.c
+index 3ca9814a7..ab49efeb6 100644
+--- a/drivers/nxp/crypto/caam/src/jobdesc.c
++++ b/drivers/nxp/crypto/caam/src/jobdesc.c
+@@ -50,6 +50,7 @@ void desc_add_word(uint32_t *desc, uint32_t word)
+ }
+ 
+ /* Add Pointer to the descriptor */
++__attribute__((optimize("O0")))
+ void desc_add_ptr(uint32_t *desc, phys_addr_t *ptr)
+ {
+ 	uint32_t len = desc_length(desc);
+@@ -61,6 +62,8 @@ void desc_add_ptr(uint32_t *desc, phys_addr_t *ptr)
+ 	ptr_addr_t *ptr_addr = (ptr_addr_t *) last;
+ 
+ 	ptr_addr->m_halves.high = PHYS_ADDR_HI(ptr);
++	// put a print here, or set optimization to O0
++	// otherwise, we don't get past these lines
+ 	ptr_addr->m_halves.low = PHYS_ADDR_LO(ptr);
+ #else
+ 	*last = ptr;
