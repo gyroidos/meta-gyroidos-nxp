@@ -1,0 +1,28 @@
+From c0f2f3c54d45749edad2b19e1c59d4ae60d296c1 Mon Sep 17 00:00:00 2001
+From: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+Date: Tue, 5 Aug 2025 21:29:57 +0200
+Subject: [PATCH] include/configs/tqmlx2160a.h: Set bootcommand
+
+Set the bootcommand for booting gyroidos from sd card.
+
+Signed-off-by: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+---
+ include/configs/tqmlx2160a.h | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/include/configs/tqmlx2160a.h b/include/configs/tqmlx2160a.h
+index 1db9ce3cd71..0c0b9a4df75 100644
+--- a/include/configs/tqmlx2160a.h
++++ b/include/configs/tqmlx2160a.h
+@@ -343,7 +343,10 @@ unsigned long get_board_ddr_clk(void);
+ #define XSPI_NOR_BOOTCOMMAND					\
+ 	"run distro_bootcmd;run xspi_bootcmd; "
+ #define SD_BOOTCOMMAND						\
+-	"run distro_bootcmd;run sd_bootcmd;"
++	"load mmc ${mmcblkdev}:${bootpart} 0x80d00000 ${dpl_file};"	\
++	"fsl_mc lazyapply DPL 0x80d00000;" 			\
++	"load mmc 0:1 ${loadaddr} /fitImage-gyroidos-cml-initramfs;"	\
++	"bootm ${loadaddr}"
+ #define SD2_BOOTCOMMAND						\
+ 	"run distro_bootcmd;run emmc_bootcmd;"
+ 
