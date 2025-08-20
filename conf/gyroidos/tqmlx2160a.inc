@@ -13,7 +13,8 @@ GYROIDOS_FSTYPES = "wic wic.bmap"
 
 BBMULTICONFIG = "guestos"
 KERNEL_CLASSES:append = " kernel-fitimage "
-KERNEL_IMAGETYPE:tqmlx2160a = "fitImage"
+# scarthgap meta-tq has fitImage by default, kirkstone needs to set explicitly
+KERNEL_IMAGETYPE:tqmlx2160a = "${@bb.utils.contains('DISTRO_CODENAME', 'kirkstone', 'fitImage', '', d)}"
 PACKAGE_CLASSES = "package_ipk"
 
 IMAGE_BOOT_FILES:append:tqmlx2160a = " ${KERNEL_DEPLOYSUBDIR}/fitImage-gyroidos-cml-initramfs-${MACHINE}-${MACHINE};fitImage-gyroidos-cml-initramfs"
