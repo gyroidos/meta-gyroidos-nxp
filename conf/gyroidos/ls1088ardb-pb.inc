@@ -33,3 +33,7 @@ WKS_FILE:ls1088ardb-pb = "ls1088ardb-pb.wks.in"
 # seems good.
 UBOOT_LOADADDRESS:ls1088ardb-pb = "0x84000000"
 UBOOT_ENTRYPOINT:ls1088ardb-pb = "0x84000000"
+
+# secure boot keys for the CST tool
+SECURE_PRI_KEY = "${SECURE_BOOT_SIG_KEY}"
+SECURE_PUB_KEY = "${SECURE_BOOT_SIG_CERT}"
