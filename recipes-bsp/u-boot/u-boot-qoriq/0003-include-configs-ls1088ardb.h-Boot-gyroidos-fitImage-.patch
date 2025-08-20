@@ -1,4 +1,4 @@
-From 0cc9c0c59e2fa21577a04f7e48382c3801aba21f Mon Sep 17 00:00:00 2001
+From 14f5cb0a31d46577a54718f3e44ea4cbec5a361b Mon Sep 17 00:00:00 2001
 From: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
 Date: Tue, 5 Aug 2025 11:43:14 +0200
 Subject: [PATCH] include/configs/ls1088ardb.h: Boot gyroidos fitImage from
@@ -9,22 +9,27 @@ Load and boot gyroidos fitImage from SD/MMC bootpart.
 TODO: secure boot validation
 
 Signed-off-by: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+
 ---
- include/configs/ls1088ardb.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ include/configs/ls1088ardb.h | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/include/configs/ls1088ardb.h b/include/configs/ls1088ardb.h
-index 068ccb56e28..d045fc10708 100644
+index 8314c9df06c..63a87bd9894 100644
 --- a/include/configs/ls1088ardb.h
 +++ b/include/configs/ls1088ardb.h
-@@ -470,8 +470,8 @@
- 		" && mmc read 0x806C0000 0x3600 0x20 "		\
+@@ -461,8 +461,13 @@
+ 		" && load mmc 0:1 0x806C0000 dpl.dtb.hdr "		\
  		"&& esbc_validate 0x806C0000;env exists mcinitcmd "	\
  		"&& fsl_mc lazyapply dpl 0x80001000;"		\
 -		"run distro_bootcmd;run sd_bootcmd;"		\
--		"env exists secureboot && esbc_halt;"
-+		"load mmc 0:1 ${load_addr} /fitImage-gyroidos-cml-initramfs" \
-+		" && bootm ${load_addr};"
++		"load mmc 0:1 ${load_addr} /fitImage-gyroidos-cml-initramfs;" \
++		"env exists secureboot && " \
++		"load mmc 0:1 ${kernelheader_addr_r} /fitImage-gyroidos-cml-initramfs.hdr " \
++		" && esbc_validate ${kernelheader_addr_r};" \
++		"bootm ${load_addr}; " \
+ 		"env exists secureboot && esbc_halt;"
++
  #else
  #if defined(CONFIG_QSPI_BOOT)
  /* Try to boot an on-QSPI kernel first, then do normal distro boot */
