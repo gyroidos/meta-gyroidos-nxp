@@ -15,11 +15,14 @@ KERNEL_CLASSES:append = " kernel-fitimage "
 KERNEL_IMAGETYPE:ls1088ardb-pb = "fitImage"
 PACKAGE_CLASSES = "package_ipk"
 
+MC_DPC ?= "dpc.0x1D-0x0D.dtb"
+MC_DPL ?= "dpl-eth.0x1D_0x0D.dtb"
+
 IMAGE_BOOT_FILES:ls1088ardb-pb = " \
 	${KERNEL_DEPLOYSUBDIR}/fitImage-gyroidos-cml-initramfs-${MACHINE}-${MACHINE};fitImage-gyroidos-cml-initramfs \
 	mc_app/mc.itb;mc.itb \
-	mc-utils/dpc.0x1D-0x0D.dtb;dpc.dtb \
-	mc-utils/dpl-eth.0x1D_0x0D.dtb;dpl.dtb \
+	mc-utils/${MC_DPC};dpc.dtb \
+	mc-utils/${MC_DPL};dpl.dtb \
 	"
 
 GYROIDOS_BOOTSTREAM0 = "${IMAGE_FILE_PBL_SD}"
