@@ -1,4 +1,4 @@
-From d84268d0b495fe0f25ac2c4377b1db315c879a29 Mon Sep 17 00:00:00 2001
+From ff4b19ae00cd19735607453b785d2698f81d3d51 Mon Sep 17 00:00:00 2001
 From: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
 Date: Tue, 5 Aug 2025 11:38:14 +0200
 Subject: [PATCH] include/configs/ls1088ardb.h: MC init from bootpart
@@ -10,14 +10,14 @@ TODO: Secure boot validation.
 Signed-off-by: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
 
 ---
- include/configs/ls1088ardb.h | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ include/configs/ls1088ardb.h | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
 diff --git a/include/configs/ls1088ardb.h b/include/configs/ls1088ardb.h
-index 7b13d70b5d7..38443229b9e 100644
+index 7b13d70b5d7..abf474c3d5a 100644
 --- a/include/configs/ls1088ardb.h
 +++ b/include/configs/ls1088ardb.h
-@@ -270,8 +270,9 @@
+@@ -270,11 +270,12 @@
  	"esbc_validate 0x80680000 ;"			\
  	"fsl_mc start mc 0x80a00000 0x80e00000\0"
  #define SD_MC_INIT_CMD				\
@@ -27,8 +27,13 @@ index 7b13d70b5d7..38443229b9e 100644
 +	"load mmc 0:1 0x80a00000 mc.itb;"		\
 +	"load mmc 0:1 0x80e00000 dpc.dtb;"	\
  	"env exists secureboot && "			\
- 	"mmc read 0x80640000 0x3200 0x20 && "		\
- 	"mmc read 0x80680000 0x3400 0x20 && "		\
+-	"mmc read 0x80640000 0x3200 0x20 && "		\
+-	"mmc read 0x80680000 0x3400 0x20 && "		\
++	"load mmc 0:1 0x80640000 mc.itb.hdr &&"		\
++	"load mmc 0:1 0x80680000 dpc.dtb.hdr &&"		\
+ 	"esbc_validate 0x80640000 && "			\
+ 	"esbc_validate 0x80680000 ;"			\
+ 	"fsl_mc start mc 0x80a00000 0x80e00000\0"
 @@ -331,7 +332,7 @@
  	"kernel_size=0x2800000\0"		\
  	"kernel_size_sd=0x14000\0"		\

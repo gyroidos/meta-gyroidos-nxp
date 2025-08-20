@@ -1,4 +1,4 @@
-From 5e7a9610bf39888a623069da79cc4ba67e9df1ab Mon Sep 17 00:00:00 2001
+From 190980968758b47f43ba1a0544cbc7519c5e104e Mon Sep 17 00:00:00 2001
 From: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
 Date: Tue, 5 Aug 2025 11:42:27 +0200
 Subject: [PATCH] include/configs/ls1088ardb.h: DPL lazy init from bootpart
@@ -8,20 +8,26 @@ Load data path layout from SD/MMC bootpart.
 TODO: secure boot
 
 Signed-off-by: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+
 ---
- include/configs/ls1088ardb.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/configs/ls1088ardb.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/include/configs/ls1088ardb.h b/include/configs/ls1088ardb.h
-index 6a461263ef6..068ccb56e28 100644
+index abf474c3d5a..8314c9df06c 100644
 --- a/include/configs/ls1088ardb.h
 +++ b/include/configs/ls1088ardb.h
-@@ -465,7 +465,7 @@
+@@ -455,10 +455,10 @@
+ 		"run distro_bootcmd;run qspi_bootcmd;"		\
  		"env exists secureboot && esbc_halt;"
  #define SD_BOOTCOMMAND						\
- 		"env exists mcinitcmd && mmcinfo; "		\
+-		"env exists mcinitcmd && mmcinfo; "		\
 -		"mmc read 0x80001000 0x6800 0x800; "		\
++		"env exists mcinitcmd && mmcinfo && "		\
 +		"load mmc 0:1 0x80001000 dpl.dtb; "		\
  		"env exists mcinitcmd && env exists secureboot "	\
- 		" && mmc read 0x806C0000 0x3600 0x20 "		\
+-		" && mmc read 0x806C0000 0x3600 0x20 "		\
++		" && load mmc 0:1 0x806C0000 dpl.dtb.hdr "		\
  		"&& esbc_validate 0x806C0000;env exists mcinitcmd "	\
+ 		"&& fsl_mc lazyapply dpl 0x80001000;"		\
+ 		"run distro_bootcmd;run sd_bootcmd;"		\
