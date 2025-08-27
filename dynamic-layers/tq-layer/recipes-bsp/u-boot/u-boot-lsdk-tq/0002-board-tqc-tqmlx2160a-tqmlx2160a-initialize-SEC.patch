@@ -1,0 +1,27 @@
+From 3e9c624a34b7c76115c08367a284b982f0a03250 Mon Sep 17 00:00:00 2001
+From: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+Date: Wed, 27 Aug 2025 11:39:29 +0200
+Subject: [PATCH] board/tqc/tqmlx2160a/tqmlx2160a: initialize SEC
+
+similar to lx2160ardb.
+
+Signed-off-by: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+---
+ board/tqc/tqmlx2160a/tqmlx2160a.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/board/tqc/tqmlx2160a/tqmlx2160a.c b/board/tqc/tqmlx2160a/tqmlx2160a.c
+index 4edbb42dd0e..2029a944d8a 100644
+--- a/board/tqc/tqmlx2160a/tqmlx2160a.c
++++ b/board/tqc/tqmlx2160a/tqmlx2160a.c
+@@ -130,6 +130,10 @@ int board_init(void)
+ 	ret = mblx2160a_board_init();
+ #endif
+ 
++#ifdef CONFIG_FSL_CAAM
++	sec_init();
++#endif
++
+ 	return ret;
+ }
+ 

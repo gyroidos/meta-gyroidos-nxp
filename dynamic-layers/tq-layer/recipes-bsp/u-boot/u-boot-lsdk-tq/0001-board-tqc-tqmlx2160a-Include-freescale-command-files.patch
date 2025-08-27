@@ -1,0 +1,34 @@
+From 3fa280bfaf286323baf47ddee56fe15f18adde3c Mon Sep 17 00:00:00 2001
+From: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+Date: Wed, 27 Aug 2025 11:38:28 +0200
+Subject: [PATCH] board/tqc/tqmlx2160a: Include freescale command files for
+ esbc_validate
+
+Signed-off-by: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+---
+ board/tqc/tqmlx2160a/Kconfig  | 1 +
+ board/tqc/tqmlx2160a/Makefile | 3 +++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/board/tqc/tqmlx2160a/Kconfig b/board/tqc/tqmlx2160a/Kconfig
+index c3682677e2a..05d92d99744 100644
+--- a/board/tqc/tqmlx2160a/Kconfig
++++ b/board/tqc/tqmlx2160a/Kconfig
+@@ -27,5 +27,6 @@ config MBLX2160A
+ endchoice
+ 
+ source "board/tqc/common/Kconfig"
++source "board/freescale/common/Kconfig"
+ 
+ endif
+diff --git a/board/tqc/tqmlx2160a/Makefile b/board/tqc/tqmlx2160a/Makefile
+index 463173cd671..aad8db2e133 100644
+--- a/board/tqc/tqmlx2160a/Makefile
++++ b/board/tqc/tqmlx2160a/Makefile
+@@ -8,3 +8,6 @@
+ obj-y += tqmlx2160a.o
+ obj-$(CONFIG_MBLX2160A) += tqmlx2160a_mblx2160a.o
+ obj-y += ddr.o
++
++obj-$(CONFIG_CMD_ESBC_VALIDATE) += ../../freescale/common/fsl_validate.o ../../freescale/common/cmd_esbc_validate.o
++obj-$(CONFIG_CHAIN_OF_TRUST) += ../../freescale/common/fsl_chain_of_trust.o

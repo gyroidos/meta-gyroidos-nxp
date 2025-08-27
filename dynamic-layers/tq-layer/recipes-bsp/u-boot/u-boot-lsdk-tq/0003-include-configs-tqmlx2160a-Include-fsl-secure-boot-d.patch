@@ -1,0 +1,23 @@
+From 62c00ea0900a9d7b1765b19db6dcc19c5251f36d Mon Sep 17 00:00:00 2001
+From: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+Date: Wed, 27 Aug 2025 11:40:30 +0200
+Subject: [PATCH] include/configs/tqmlx2160a: Include fsl secure boot definions
+
+Include header similar to lx2160ardb.
+
+Signed-off-by: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+---
+ include/configs/tqmlx2160a.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/include/configs/tqmlx2160a.h b/include/configs/tqmlx2160a.h
+index e1393c8db4c..538950cfe7d 100644
+--- a/include/configs/tqmlx2160a.h
++++ b/include/configs/tqmlx2160a.h
+@@ -423,4 +423,6 @@ unsigned long get_board_ddr_clk(void);
+ 
+ #include <config_distro_bootcmd.h>
+ 
++#include <asm/fsl_secure_boot.h>
++
+ #endif /* __TQMLX2160A_H */

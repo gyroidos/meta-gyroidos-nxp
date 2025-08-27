@@ -1,8 +1,10 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://0001-scripts-dtc-Remove-redundant-YYLOC-global-declaratio.patch"
+SRC_URI += "file://0001-board-tqc-tqmlx2160a-Include-freescale-command-files.patch"
 SRC_URI += "file://0001-include-configs-tqmlx2160a.h-Set-bootcommand.patch"
+SRC_URI += "file://0002-board-tqc-tqmlx2160a-tqmlx2160a-initialize-SEC.patch"
+SRC_URI += "file://0003-include-configs-tqmlx2160a-Include-fsl-secure-boot-d.patch"
+SRC_URI += "file://0005-include-configs-tqmlx2160a-Set-loaddr.patch"
+SRC_URI += "file://0007-include-configs-tqmlx2160a-Secure-Boot-for-MC-firmwa.patch"
 SRC_URI += "file://tqmlx2160a.cfg"
-
-
