@@ -1,0 +1,25 @@
+From 1bc7f31d68d4d2c64983489c17e16be640cf089e Mon Sep 17 00:00:00 2001
+From: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+Date: Wed, 27 Aug 2025 12:30:34 +0200
+Subject: [PATCH] include/configs/tqmlx2160a: Set loaddr
+
+Set loadaddr to 0xa0000000 to match the address in CST input files.
+
+Signed-off-by: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+---
+ include/configs/tqmlx2160a.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/configs/tqmlx2160a.h b/include/configs/tqmlx2160a.h
+index c51bb3a3b3b..532afb79139 100644
+--- a/include/configs/tqmlx2160a.h
++++ b/include/configs/tqmlx2160a.h
+@@ -49,7 +49,7 @@
+ #define CONFIG_SYS_MEMTEST_END		(CONFIG_SYS_SDRAM_BASE + (100 * SZ_1M))
+ 
+ /* Miscellaneous configurable options */
+-#define CONFIG_SYS_LOAD_ADDR		0x90000000
++#define CONFIG_SYS_LOAD_ADDR		0xa0000000
+ #define CONFIG_LOADADDR			CONFIG_SYS_LOAD_ADDR
+ 
+ /* SMP Definitinos  */
