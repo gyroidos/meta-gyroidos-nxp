@@ -1,6 +1,6 @@
 MACHINE="ls1088ardb-pb"
 
-PREFERRED_PROVIDER_virtual/kernel:ls1088ardb-pb = "linux-rolling-stable"
+PREFERRED_PROVIDER_virtual/kernel:ls1088ardb-pb = "linux-qoriq"
 
 INITRAMFS_IMAGE = "gyroidos-cml-initramfs"
 INITRAMFS_IMAGE_BUNDLE = "0"

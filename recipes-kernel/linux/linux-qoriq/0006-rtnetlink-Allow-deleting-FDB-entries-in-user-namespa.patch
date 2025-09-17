@@ -1,0 +1,40 @@
+From eb2c2ee51790bb4789c32d9b4de5fee0ccc3cd5b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Johannes=20Wiesb=C3=B6ck?=
+ <johannes.wiesboeck@aisec.fraunhofer.de>
+Date: Tue, 26 Aug 2025 19:05:21 +0200
+Subject: [PATCH 6/6] rtnetlink: Allow deleting FDB entries in user namespace
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Deletion of FDB entries requires CAP_NET_ADMIN, yet, processes in a
+non-initial user namespace receive an EPERM because the capability is
+always checked against the initial user namespace. This restricts the
+FDB management from unprivileged containers.
+
+Replace netlink_capable with netlink_net_capable that performs the
+capability check on the user namespace the netlink socket was opened in.
+
+Tested in a container on GyroidOS...
+
+Signed-off-by: Johannes Wiesböck <johannes.wiesboeck@aisec.fraunhofer.de>
+---
+ net/core/rtnetlink.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/net/core/rtnetlink.c b/net/core/rtnetlink.c
+index 1a717bc57bc1..41dfb22e2640 100644
+--- a/net/core/rtnetlink.c
++++ b/net/core/rtnetlink.c
+@@ -4412,7 +4412,7 @@ static int rtnl_fdb_del(struct sk_buff *skb, struct nlmsghdr *nlh,
+ 	int err;
+ 	u16 vid;
+ 
+-	if (!netlink_capable(skb, CAP_NET_ADMIN))
++	if (!netlink_net_capable(skb, CAP_NET_ADMIN))
+ 		return -EPERM;
+ 
+ 	if (!del_bulk) {
+-- 
+2.43.0
+
