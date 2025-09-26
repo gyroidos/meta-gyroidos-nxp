@@ -24,7 +24,7 @@ SRC_URI = "git://github.com/nxp-qoriq/linux;protocol=https;nobranch=1"
 SRC_URI += " \
     file://${MACHINE}.cfg \
     \
-    file://0006-rtnetlink-Allow-deleting-FDB-entries-in-user-namespa.patch \
+    file://0001-rtnetlink-Allow-deleting-FDB-entries-in-user-namespa.patch \
 "
 
 SRCREV = "dfaf2136deb2af2e60b994421281ba42f1c087e0"
