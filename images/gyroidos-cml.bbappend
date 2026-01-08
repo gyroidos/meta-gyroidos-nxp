@@ -4,7 +4,7 @@ KERNEL_IMAGE_FILE = "cml-kernel/fitImage-gyroidos-cml-initramfs-${MACHINE}-${MAC
 OS_CONFIG_IN := "${THISDIR}/${PN}/${MACHINE}.conf"
 
 # tqmlx2160a-mblx2160a + ls1088ardb-pb
-DEPENDS:append:qoriq = "qoriq-signed-images"
+DEPENDS:append:qoriq = " qoriq-signed-images"
 
 # tqma8mpxl-mba8mpxl customization
 do_sign_guestos:prepend:tqma8mpxl-mba8mpxl () {
