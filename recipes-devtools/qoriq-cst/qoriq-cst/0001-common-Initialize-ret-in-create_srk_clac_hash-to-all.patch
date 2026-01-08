@@ -1,0 +1,42 @@
+From 7b92f95e4ed74f52303327f6d412b0944240a226 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Michael=20Wei=C3=9F?= <michael.weiss@aisec.fraunhofer.de>
+Date: Fri, 9 Jan 2026 09:23:28 +0100
+Subject: [PATCH] common: Initialize ret in create_srk_clac_hash to allow
+ compile with '-Og'
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Fix following error if compile with '-Og':
+
+tools/header_generation/create_hdr_common.c: In function ‘create_srk_calc_hash’:
+tools/header_generation/create_hdr_common.c:460:16: error: ‘ret’ may be used uninitialized [-Werror=maybe-uninitialized]
+  460 |         return ret;
+      |                ^~~
+tools/header_generation/create_hdr_common.c:397:16: note: ‘ret’ was declared here
+  397 |         int i, ret;
+      |                ^~~
+
+Tested on Debian trixie with GCC-12.4 and GCC-14.2.
+
+Signed-off-by: Michael Weiß <michael.weiss@aisec.fraunhofer.de>
+---
+ tools/header_generation/create_hdr_common.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/header_generation/create_hdr_common.c b/tools/header_generation/create_hdr_common.c
+index a2363ce..02474ac 100644
+--- a/tools/header_generation/create_hdr_common.c
++++ b/tools/header_generation/create_hdr_common.c
+@@ -394,7 +394,7 @@ int create_hdr(int argc, char **argv)
+  ***************************************************************************/
+ int create_srk_calc_hash(uint32_t max_keys)
+ {
+-	int i, ret;
++	int i, ret = SUCCESS;
+ 	uint32_t key_len;
+ 	uint8_t ctx[CRYPTO_HASH_CTX_SIZE];
+ 
+-- 
+2.47.3
+
