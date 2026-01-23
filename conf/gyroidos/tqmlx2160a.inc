@@ -17,6 +17,9 @@ KERNEL_CLASSES:append = " kernel-fitimage "
 KERNEL_IMAGETYPE:tqmlx2160a = "${@bb.utils.contains('DISTRO_CODENAME', 'kirkstone', 'fitImage', '', d)}"
 PACKAGE_CLASSES = "package_ipk"
 
+GYROID_DDR_IMAGE:tddqmlx2160a ?= "ddr-phy/fip_ddr.bin"
+GYROIDOS_DDR_IMAGE:tqmlx2160a = "${@bb.utils.contains('DISTRO_CODENAME', 'kirkstone', 'ddr-phy/fip_ddr.bin', 'atf/${DDR_IMAGE}', d)}"
+
 IMAGE_BOOT_FILES:append:tqmlx2160a = " ${KERNEL_DEPLOYSUBDIR}/fitImage-gyroidos-cml-initramfs-${MACHINE}-${MACHINE};fitImage-gyroidos-cml-initramfs"
 #IMAGE_BOOT_FILES:append:tqmlx2160a = " ${KERNEL_DEPLOYSUBDIR}/Image;Image"
 GYROIDOS_BOOTSTREAM0= "atf/${BL2_IMAGE}"
