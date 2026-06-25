@@ -2,6 +2,8 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI:append = " file://0001-common-Initialize-ret-in-create_srk_clac_hash-to-all.patch"
 
+inherit p11-signing
+
 do_install:append () {
     if [ -n "${SECURE_PRI_KEY}" ]; then
         openssl rsa -in ${D}/${bindir}/cst/srk.pri -traditional -out ${D}/${bindir}/cst/srk.pri
